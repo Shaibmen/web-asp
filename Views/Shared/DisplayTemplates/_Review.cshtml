@@ -1,0 +1,14 @@
+﻿@model WEbAPi.Models.Review
+
+<div class="review">
+    <p><strong>@Model.User.Login</strong> оставил(а) отзыв <span>@Model.CreatedAt.ToString("dd.MM.yyyy")</span></p>
+
+    <div class="rating">
+        @for (int i = 1; i <= 5; i++)
+        {
+            <span class="star @(i <= Model.Rating ? "filled" : "")">&#9733;</span>
+        }
+    </div>
+
+    <p>@Model.Product</p>
+</div>

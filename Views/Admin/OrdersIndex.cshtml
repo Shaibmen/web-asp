@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WEbAPi.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders Index";
+}
+
+<h1>Orders Index</h1>
+
+<p>
+    <a asp-action="OrdersCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Catalogs.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Catalogs.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalSum)
+                </td>
+                <td>
+                    <a asp-action="OrdersEdit" asp-route-id="@item.OrdersId">Edit</a> |
+                    <a asp-action="OrdersDelete" asp-route-id="@item.OrdersId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

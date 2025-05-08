@@ -11,6 +11,8 @@ public class Catalog
     public string Publisher { get; set; }
     public int YearPublic { get; set; }
     public string Price { get; set; }
+    public List<Review> Reviews { get; set; }
     public ICollection<Order> Orders { get; set; }
     public ICollection<Category> Categories { get; set; }
 }
+

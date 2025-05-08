@@ -1,19 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Controllers/AuthController.cs
+using Microsoft.AspNetCore.Mvc;
 using WEbAPi.Models;
 
 public class AuthController : Controller
 {
-    private readonly AuthService _authService;
+    private readonly ApiService _apiService;
 
-    public AuthController(AuthService authService)
+    public AuthController(ApiService apiService)
     {
-        _authService = authService;
+        _apiService = apiService;
     }
+
 
     [HttpGet]
     public IActionResult Login()
     {
-        return View();
+        return View(new LoginRequest()); // Используем LoginRequest вместо LoginModel
     }
 
     [HttpPost]
@@ -22,18 +24,24 @@ public class AuthController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        var error = await _authService.LoginAsync(model);
+        var token = await _apiService.LoginAsync(model.Login, model.Password); // Используем Login
+        if (token == null)
+        {
+            ModelState.AddModelError("", "Неверные учетные данные");
+            return View(model);
+        }
 
-        if (error == null)
-            return RedirectToAction("Catalog", "Customer");
+        Response.Cookies.Append("jwt_token", token, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.Now.AddHours(1)
+        });
 
-        ModelState.AddModelError("", error);
-        return View(model);
+        return RedirectToAction("Index", "Home");
     }
 
-    public async Task<IActionResult> Logout()
-    {
-        await _authService.LogoutAsync();
-        return RedirectToAction("Login");
-    }
 }
+
+

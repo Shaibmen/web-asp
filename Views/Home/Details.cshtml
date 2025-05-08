@@ -1,0 +1,11 @@
+﻿@model WEbAPi.Models.Catalog
+
+<h1>@Model.Title</h1>
+<p>@Model.Author</p>
+<p>Цена: @Model.Price руб.</p>
+<p>Год публикации: @Model.YearPublic</p>
+
+<h3>Отзывы</h3>
+<div id="reviews-container">
+	@Html.Partial("_Reviews", Model.Reviews)
+</div>

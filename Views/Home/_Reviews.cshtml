@@ -1,0 +1,15 @@
+﻿@model IEnumerable<WEbAPi.Models.Review>
+
+<div class="reviews">
+    @if (!Model.Any())
+    {
+        <p>Нет отзывов для этого товара.</p>
+    }
+    else
+    {
+        foreach (var review in Model)
+        {
+            @Html.DisplayFor(modelItem => review)
+        }
+    }
+</div>

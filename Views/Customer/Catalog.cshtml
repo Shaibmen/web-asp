@@ -5,6 +5,7 @@
 <form method="get" class="mb-4">
     <div class="input-group">
         <input type="text" name="searchQuery" class="form-control" placeholder="Поиск..." />
+        
         <select name="category" class="form-control">
             <option value="">Все категории</option>
             @if (ViewBag.Categories is List<WEbAPi.Models.Category> categories)
@@ -15,10 +16,12 @@
                 }
             }
         </select>
+
         <select name="sortBy" class="form-control">
             <option value="price_asc">По возрастанию цены</option>
             <option value="price_desc">По убыванию цены</option>
         </select>
+
         <div class="input-group-append">
             <button type="submit" class="btn btn-primary">Подтвердить</button>
         </div>
@@ -39,21 +42,31 @@
         <tbody>
             @foreach (var product in Model)
             {
-                <tr>
-                    <td>@product.Title</td>
-                    <td>@product.Author</td>
-                    <td>@product.Price</td>
-                    <td>
-                        <a href="@Url.Action("ProductDetails", "Customer", new { id = product.CatalogsId })" class="btn btn-info">Подробнее</a>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <form asp-action="AddToCart" method="post" style="display:inline;">
-                                <input type="hidden" name="catalogId" value="@product.CatalogsId" />
-                                <button type="submit" class="btn btn-primary">В корзину</button>
-                            </form>
-                        }
-                    </td>
-                </tr>
+                if (product != null)
+                {
+                    <tr>
+                        <td>@product.Title</td>
+                        <td>@product.Author</td>
+                        <td>@product.Price</td>
+                        <td>
+                            <a href="@Url.Action("ProductDetails", "Customer", new { id = product.CatalogsId })" class="btn btn-info">Подробнее</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Html.Partial("_AddReviewPartial", new WEbAPi.Models.ReviewFormModel { ProductId = product.CatalogsId })
+                            }
+                            else
+                            {
+                                <p>Для добавления отзыва необходимо авторизоваться.</p>
+                            }
+
+                            @await Component.InvokeAsync("AverageRating", new { productId = product.CatalogsId })
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

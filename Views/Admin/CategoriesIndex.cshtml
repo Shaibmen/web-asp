@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WEbAPi.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories Index";
+}
+
+<h1>Categories Index</h1>
+
+<p>
+    <a asp-action="CategoriesCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    <a asp-action="CategoriesEdit" asp-route-id="@item.CategoryId">Edit</a> |
+                    <a asp-action="CategoriesDelete" asp-route-id="@item.CategoryId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

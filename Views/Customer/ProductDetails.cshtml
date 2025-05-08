@@ -4,6 +4,9 @@
 <p><strong>Автор:</strong> @Model.Product.Author</p>
 <p><strong>Цена:</strong> @Model.Product.Price</p>
 
+
+@await Component.InvokeAsync("AverageRating", new { productId = Model.Product.CatalogsId })
+
 <h3>Отзывы</h3>
 @if (Model.Reviews != null && Model.Reviews.Any())
 {
@@ -35,29 +38,28 @@ else
     <p>Пока нет отзывов.</p>
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <form asp-action="AddToCart" method="post" style="display:inline;">
-        <input type="hidden" name="catalogId" value="@Model.Product.CatalogsId" />
-        <button type="submit" class="btn btn-primary">Добавить в корзину</button>
-    </form>
 
-    <h3>Оставьте отзыв</h3>
-    <form method="post" asp-action="AddReview">
-        <input type="hidden" name="productId" value="@Model.Product.CatalogsId" />
-        <div class="form-group">
-            <label for="rating">Оценка (1-5)</label>
-            <select name="rating" class="form-control">
-                @for (int i = 1; i <= 5; i++)
-                {
-                    <option value="@i">@i</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="text">Отзыв</label>
-            <textarea name="text" class="form-control" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Оставить отзыв</button>
-    </form>
-}
+<form asp-action="AddToCart" asp-controller="Customer" method="post" style="display:inline;">
+    <input type="hidden" name="catalogId" value="@Model.Product.CatalogsId" />
+    <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+</form>
+
+<h3>Оставьте отзыв</h3>
+<form method="post" action="@Url.Action("AddReview", "Customer")">
+    <input type="hidden" name="productId" value="@Model.Product.CatalogsId" />
+    <div class="form-group">
+        <label for="rating">Оценка (1-5)</label>
+        <select name="rating" class="form-control">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="text">Отзыв</label>
+        <textarea name="text" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Оставить отзыв</button>
+</form>
+ы

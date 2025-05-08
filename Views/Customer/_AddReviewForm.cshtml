@@ -1,0 +1,24 @@
+﻿@model WEbAPi.Models.Review
+
+@{
+    var user = User.Identity.Name;
+}
+
+<form method="post" action="@Url.Action("AddReview", "Customer")">
+    <div class="form-group">
+        <label for="rating">Оценка (1-5)</label>
+        <select name="rating" class="form-control" id="rating">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="reviewText">Отзыв</label>
+        <textarea name="text" class="form-control" id="reviewText" rows="3" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Оставить отзыв</button>
+</form>

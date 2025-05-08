@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WEbAPi.Models.Catalog>
+
+@{
+    ViewData["Title"] = "Catalogs Index";
+}
+
+<h1>Catalogs Index</h1>
+
+<p>
+    <a asp-action="CatalogsCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearPublic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearPublic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="CatalogsEdit" asp-route-id="@item.CatalogsId">Edit</a> |
+                    <a asp-action="CatalogsDelete" asp-route-id="@item.CatalogsId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

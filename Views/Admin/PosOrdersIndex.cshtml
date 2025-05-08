@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WEbAPi.Models.PosOrder>
+
+@{
+    ViewData["Title"] = "PosOrders Index";
+}
+
+<h1>PosOrders Index</h1>
+
+<p>
+    <a asp-action="PosOrdersCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.OrdersId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrdersId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    <a asp-action="PosOrdersEdit" asp-route-id="@item.PosOrderId">Edit</a> |
+                    <a asp-action="PosOrdersDelete" asp-route-id="@item.PosOrderId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

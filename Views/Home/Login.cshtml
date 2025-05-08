@@ -1,0 +1,38 @@
+﻿@model WEbAPi.Models.LoginRequest
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-container">
+    <h2>Login</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Login">Login</label>
+            <input asp-for="Login" class="form-control" required />
+            <span asp-validation-for="Login" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" type="password" class="form-control" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+
+    <div class="auth-links">
+        <a asp-action="Register">Don't have an account? Register</a>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState[""]?.Errors.Count > 0)
+    {
+        <div class="alert alert-danger">
+            @ViewData.ModelState[""].Errors.First().ErrorMessage
+        </div>
+    }
+</div>

@@ -1,0 +1,46 @@
+﻿@model WEbAPi.Models.Order
+
+@{
+    ViewData["Title"] = "Orders Edit";
+}
+
+<h1>Orders Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="OrdersEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrdersId" />
+            <div class="form-group">
+                <label asp-for="CatalogsId" class="control-label"></label>
+                <select asp-for="CatalogsId" class="form-control" asp-items="ViewBag.CatalogsId"></select>
+                <span asp-validation-for="CatalogsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsersId" class="control-label"></label>
+                <select asp-for="UsersId" class="form-control" asp-items="ViewBag.UsersId"></select>
+                <span asp-validation-for="UsersId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSum" class="control-label"></label>
+                <input asp-for="TotalSum" class="form-control" />
+                <span asp-validation-for="TotalSum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="OrdersIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
