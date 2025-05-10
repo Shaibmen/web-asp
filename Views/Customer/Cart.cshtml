@@ -1,31 +1,38 @@
-﻿@model List<WEbAPi.Models.PosOrder>
+﻿@model WEbAPi.Models.CartResponse
 
 <h2>Корзина</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Товар</th>
-            <th>Количество</th>
-            <th>Цена</th>
-            <th>Итого</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model == null || Model.Items == null || !Model.Items.Any())
+{
+    <p>Ваша корзина пуста</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Итого</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
                 <tr>
-                    <td>@item.Product.Title</td>
+                    <td>@(item.Product?.Title ?? "Неизвестный товар")</td>
                     <td>
                         <form asp-action="UpdateCartItem" method="post" class="d-inline">
                             <input type="hidden" name="posOrderId" value="@item.PosOrderId" />
-                            <input type="number" name="newCount" value="@item.Count" class="form-control" style="width: 70px; display: inline-block;" />
+                            <input type="number" name="newCount" value="@item.Count"
+                                   class="form-control" style="width: 70px; display: inline-block;" min="1" />
                             <button type="submit" class="btn btn-primary btn-sm">Обновить</button>
                         </form>
                     </td>
-                    <td>@item.Product.Price ₽</td>
-                    <td>@(item.Count * Convert.ToDecimal(item.Product.Price)) ₽</td>
+                    <td>@(item.Product?.Price ?? "0") ₽</td>
+                    <td>@(item.Count * decimal.Parse(item.Product?.Price ?? "0")) ₽</td>
                     <td>
                         <form asp-action="UpdateCartItem" method="post" class="d-inline">
                             <input type="hidden" name="posOrderId" value="@item.PosOrderId" />
@@ -34,10 +41,9 @@
                         </form>
                     </td>
                 </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
 
-<h3>Общая сумма: @ViewBag.TotalSum ₽</h3>
-
-
+    <h3>Общая сумма: @Model.TotalSum.ToString("C2")</h3>
+}

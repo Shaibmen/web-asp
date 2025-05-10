@@ -28,8 +28,23 @@
                     <li><a class="nav-link text-dark" asp-controller="Customer" asp-action="Cart">Корзина</a></li>
 
 
-                    @if (User.Identity.IsAuthenticated)
-                    {
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Админ-панель
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Catalogs">Управление каталогами</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Categories">Управление категориями</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Orders">Управление заказами</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Users">Управление пользователями</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Index">Все разделы</a></li>
+                                </ul>
+                            </li>
+                        
+
                         <li class="nav-item">
                             <form asp-controller="Home" asp-action="Logout" method="post" style="display:inline;">
                                 <button type="submit" class="nav-link text-dark btn btn-link">Выход</button>

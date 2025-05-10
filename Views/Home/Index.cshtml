@@ -1,10 +1,34 @@
-﻿@{
+﻿@using System.Security.Claims
+@{
     ViewData["Title"] = "Главная страница";
 }
 
 <div class="text-center">
-
-   
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="alert alert-info" role="alert">
+            Вы вошли как: <strong>@User.Identity.Name</strong>
+            @if (User.IsInRole("admin"))
+            {
+                <span> (Администратор)</span>
+            }
+            else if (User.IsInRole("user"))
+            {
+                <span> (Пользователь)</span>
+            }
+            else
+            {
+                <span> (Роль: @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value)</span>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            Вы не авторизованы. <a asp-controller="Home" asp-action="Login">Войдите</a> или
+            <a asp-controller="Home" asp-action="Register">зарегистрируйтесь</a>.
+        </div>
+    }
 
     <h1 class="display-4">Книжный магазин</h1>
     <p>Смотреть больше <a href="https://www.interpol.int/How-we-work/Notices/Red-Notices/View-Red-Notices">Сделано на шарпах кек</a>.</p>

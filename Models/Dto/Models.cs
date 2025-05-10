@@ -21,6 +21,14 @@ namespace WEbAPi.Models
         public int Quantity { get; set; }
     }
 
+    public class CartResponse
+    {
+        public IEnumerable<PosOrder> Items { get; set; } = new List<PosOrder>();
+        public decimal TotalSum { get; set; }
+    }
+
+
+
     // Карточка товара
     public class CatalogDto
     {
@@ -106,5 +114,37 @@ public class RegisterModel
     public class AuthResponse
     {
         public string Token { get; set; }
+    }
+
+    public class AverageRatingResponse
+    {
+        public double AverageRating { get; set; }
+    }
+
+    public class ProductDetailsResponse
+    {
+        public Catalog Product { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
+    }
+
+    public class ReviewRequest
+    {
+        public int ProductId { get; set; }
+        public string Text { get; set; }
+        public int Rating { get; set; }
+
+
+        // Models/RegisterRequest.cs
+
+    }
+
+
+    public static class UserRoles
+    {
+        public const int Admin = 1;
+        public const int User = 2;
+
+        public const string AdminName = "admin";
+        public const string UserName = "user";
     }
 }

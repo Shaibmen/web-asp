@@ -39,10 +39,15 @@ else
 }
 
 
-<form asp-action="AddToCart" asp-controller="Customer" method="post" style="display:inline;">
-    <input type="hidden" name="catalogId" value="@Model.Product.CatalogsId" />
+<form method="post" action="@Url.Action("AddToCart", "Customer", new { catalogId = Model.Product.CatalogsId })">
     <button type="submit" class="btn btn-primary">Добавить в корзину</button>
 </form>
+
+<div style="background: #f8f9fa; padding: 10px; margin-bottom: 20px;">
+    <p>Отладочная информация:</p>
+    <p>Текущий ID товара: @Model.Product.CatalogsId</p>
+    <p>Название: @Model.Product.Title</p>
+</div>
 
 <h3>Оставьте отзыв</h3>
 <form method="post" action="@Url.Action("AddReview", "Customer")">
@@ -62,4 +67,3 @@ else
     </div>
     <button type="submit" class="btn btn-primary">Оставить отзыв</button>
 </form>
-ы
