@@ -12,6 +12,17 @@ namespace WEbAPi.Models
         public int CatalogId { get; set; }
     }
 
+    public class CreateCatalogDto
+    {
+        [Required]
+        public string Title { get; set; }
+
+        public string Author { get; set; }
+        public string Publisher { get; set; }
+        public int YearPublic { get; set; }
+        public decimal Price { get; set; }
+    }
+
     // Товар в корзине
     public class CartItemDto
     {

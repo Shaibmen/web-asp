@@ -17,13 +17,13 @@ public class Catalog
     public string Price { get; set; }
 
     [JsonIgnore]
-    public List<Review> Reviews { get; set; }
+    public List<Review>? Reviews { get; set; }
 
     [JsonIgnore]
-    public ICollection<Order> Orders { get; set; }
+    public ICollection<Order>? Orders { get; set; }
 
-    public ICollection<Category> Categories { get; set; }
+    public ICollection<Category>? Categories { get; set; }
 
     [JsonIgnore]
-    public ICollection<PosOrder> PosOrders { get; set; } // Добавьте это свойство
+    public ICollection<PosOrder>? PosOrders { get; set; } // Добавьте это свойство
 }

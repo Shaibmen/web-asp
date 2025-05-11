@@ -519,15 +519,52 @@ public class ApiService
 
     public async Task<Role> GetRoleAsync(int id)
     {
-        var response = await _httpClient.GetAsync($"/api/admin/roles/{id}");
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<Role>();
+        try
+        {
+            var client = await GetAuthorizedClientAsync();
+            var response = await client.GetAsync($"api/admin/roles/{id}");
+
+            // Убрали EnsureSuccessStatusCode() для более гибкой обработки
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Доступ запрещен. Требуется авторизация.");
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Ошибка при получении роли: {response.StatusCode}. {errorContent}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<Role>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка в GetRoleAsync: {ex.Message}");
+            throw; // Пробрасываем исключение дальше
+        }
     }
 
     public async Task<bool> UpdateRoleAsync(int id, Role role)
     {
-        var response = await _httpClient.PutAsJsonAsync($"/api/admin/roles/{id}", role);
-        return response.IsSuccessStatusCode;
+        try
+        {
+            var client = await GetAuthorizedClientAsync();
+            var response = await client.PutAsJsonAsync($"api/admin/roles/{id}", role);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                Console.WriteLine("Ошибка авторизации при обновлении роли");
+                return false;
+            }
+
+            return response.IsSuccessStatusCode;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка в UpdateRoleAsync: {ex.Message}");
+            return false;
+        }
     }
 
     public async Task<bool> DeleteRoleAsync(int id)

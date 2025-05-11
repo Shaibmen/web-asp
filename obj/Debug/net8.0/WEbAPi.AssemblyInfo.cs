@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WEbAPi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2842db8a68f958a892475a84caf0dc1242ebfa6b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b9c076ec1bbff20cd0844635a6868345dede029")]
 [assembly: System.Reflection.AssemblyProductAttribute("WEbAPi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WEbAPi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

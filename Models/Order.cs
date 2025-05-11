@@ -16,12 +16,10 @@ public class Order
     [JsonPropertyName("totalSum")]
     public decimal TotalSum { get; set; }
 
-    [JsonIgnore]
     public virtual Catalog? Catalogs { get; set; }
 
     [JsonIgnore]
-    public virtual ICollection<PosOrder> PosOrders { get; set; } = new List<PosOrder>();
+    public virtual ICollection<PosOrder>? PosOrders { get; set; } = new List<PosOrder>();
 
-    [JsonIgnore]
     public virtual User? Users { get; set; }
 }

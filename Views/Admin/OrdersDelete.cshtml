@@ -31,7 +31,7 @@
         </dd>
     </dl>
 
-    <form asp-action="OrdersDelete">
+    <form asp-action="OrdersDelete" method="post">
         <input type="hidden" asp-for="OrdersId" />
         <div class="form-group">
             <input type="submit" value="Delete" class="btn btn-danger" /> |

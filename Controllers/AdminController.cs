@@ -32,13 +32,34 @@ public class AdminController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CatalogsCreate(Catalog catalog)
     {
-        if (ModelState.IsValid)
+        try
         {
-            if (await _apiService.CreateCatalogAsync(catalog))
+            if (!ModelState.IsValid)
+            {
+                // Логирование ошибок валидации
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine($"Validation error: {error.ErrorMessage}");
+                }
+                return View(catalog);
+            }
+
+            var result = await _apiService.CreateCatalogAsync(catalog);
+            if (result)
+            {
+                TempData["Success"] = "Каталог успешно добавлен";
                 return RedirectToAction(nameof(Catalogs));
-            ModelState.AddModelError("", "Ошибка при создании каталога");
+            }
+
+            ModelState.AddModelError("", "Ошибка при добавлении каталога");
+            return View(catalog);
         }
-        return View("CatalogsCreate", catalog);
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка: {ex.Message}");
+            ModelState.AddModelError("", $"Ошибка: {ex.Message}");
+            return View(catalog);
+        }
     }
 
     [HttpGet("Catalogs/Edit/{id}")]
@@ -53,14 +74,24 @@ public class AdminController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CatalogsEdit(int id, Catalog catalog)
     {
-        if (id != catalog.CatalogsId) return NotFound();
+        if (id != catalog.CatalogsId)
+            return NotFound();
 
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
+            return View("CatalogsEdit", catalog);
+
+        try
         {
             if (await _apiService.UpdateCatalogAsync(id, catalog))
                 return RedirectToAction(nameof(Catalogs));
-            ModelState.AddModelError("", "Ошибка при обновлении каталога");
+
+            ModelState.AddModelError("", "Failed to update catalog");
         }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", $"Error: {ex.Message}");
+        }
+
         return View("CatalogsEdit", catalog);
     }
 
@@ -76,11 +107,20 @@ public class AdminController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CatalogsDeleteConfirmed(int id)
     {
-        if (await _apiService.DeleteCatalogAsync(id))
-            return RedirectToAction(nameof(Catalogs));
-        return RedirectToAction("CatalogsDelete", new { id, error = true });
-    }
+        try
+        {
+            if (await _apiService.DeleteCatalogAsync(id))
+                return RedirectToAction(nameof(Catalogs));
 
+            TempData["Error"] = "Failed to delete catalog";
+        }
+        catch (Exception ex)
+        {
+            TempData["Error"] = $"Error: {ex.Message}";
+        }
+
+        return RedirectToAction(nameof(CatalogsDelete), new { id });
+    }
     #endregion
 
     #region Categories Views
@@ -158,8 +198,9 @@ public class AdminController : Controller
     [HttpGet("Users")]
     public async Task<IActionResult> Users()
     {
-        var users = await _apiService.GetUsersAsync();
-        return View("UsersIndex", users);
+        // Явно указываем тип возвращаемого значения
+        List<User> users = await _apiService.GetUsersAsync();
+        return View("UsersIndex", users); // List автоматически преобразуется в IEnumerable
     }
 
     [HttpGet("Users/Create")]
@@ -270,20 +311,46 @@ public class AdminController : Controller
     [HttpGet("Orders/Delete/{id}")]
     public async Task<IActionResult> OrdersDelete(int id)
     {
-        var order = await _apiService.GetOrderAsync(id);
-        if (order == null) return NotFound();
-        return View("OrdersDelete", order);
+        try
+        {
+            var order = await _apiService.GetOrderAsync(id);
+            if (order == null)
+            {
+                TempData["Error"] = "Заказ не найден";
+                return RedirectToAction(nameof(Orders));
+            }
+
+            return View("OrdersDelete", order);
+        }
+        catch (Exception ex)
+        {
+            TempData["Error"] = $"Ошибка при получении заказа: {ex.Message}";
+            return RedirectToAction(nameof(Orders));
+        }
     }
 
     [HttpPost("Orders/Delete/{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> OrdersDeleteConfirmed(int id)
     {
-        if (await _apiService.DeleteOrderAsync(id))
-            return RedirectToAction(nameof(Orders));
-        return RedirectToAction("OrdersDelete", new { id, error = true });
-    }
+        try
+        {
+            var result = await _apiService.DeleteOrderAsync(id);
+            if (result)
+            {
+                TempData["Success"] = "Заказ успешно удалён";
+                return RedirectToAction(nameof(Orders));
+            }
 
+            TempData["Error"] = "Не удалось удалить заказ";
+            return RedirectToAction(nameof(OrdersDelete), new { id });
+        }
+        catch (Exception ex)
+        {
+            TempData["Error"] = $"Ошибка при удалении заказа: {ex.Message}";
+            return RedirectToAction(nameof(OrdersDelete), new { id });
+        }
+    }
     #endregion
 
     #region PosOrders Views
@@ -368,9 +435,26 @@ public class AdminController : Controller
     [HttpGet("Roles/Edit/{id}")]
     public async Task<IActionResult> RolesEdit(int id)
     {
-        var role = await _apiService.GetRoleAsync(id);
-        if (role == null) return NotFound();
-        return View("RolesEdit", role);
+        try
+        {
+            var role = await _apiService.GetRoleAsync(id);
+            if (role == null)
+            {
+                TempData["Error"] = "Роль не найдена";
+                return RedirectToAction(nameof(Roles));
+            }
+            return View("RolesEdit", role);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            // Перенаправляем на страницу входа при ошибке авторизации
+            return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("RolesEdit", new { id }) });
+        }
+        catch (Exception ex)
+        {
+            TempData["Error"] = $"Ошибка при загрузке роли: {ex.Message}";
+            return RedirectToAction(nameof(Roles));
+        }
     }
 
     [HttpPost("Roles/Edit/{id}")]
