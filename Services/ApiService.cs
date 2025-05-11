@@ -51,7 +51,6 @@ public class ApiService
         return content;
     }
 
-    // Методы аутентификации
     public async Task<string?> LoginAsync(string login, string password)
     {
         var requestData = new { Login = login, Password = password };
@@ -86,7 +85,6 @@ public class ApiService
         }
     }
 
-    // Методы для каталога
     public async Task<List<Catalog>> GetCatalogAsync(string category, string searchQuery, string sortBy)
     {
         try
@@ -122,7 +120,6 @@ public class ApiService
 
             if (!response.IsSuccessStatusCode)
             {
-                // Логирование ошибки
                 Console.WriteLine($"Ошибка: {response.StatusCode}");
                 var errorContent = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Детали ошибки: {errorContent}");
@@ -295,8 +292,6 @@ public class ApiService
     }
 
     #region Admin Methods
-
-    // Catalogs
     public async Task<bool> CreateCatalogAsync(Catalog catalog)
     {
         var client = await GetAuthorizedClientAsync();
@@ -318,7 +313,6 @@ public class ApiService
         return response.IsSuccessStatusCode;
     }
 
-    // Categories
     public async Task<List<Category>> GetAllCategoriesAsync()
     {
         var client = await GetAuthorizedClientAsync();
@@ -353,7 +347,6 @@ public class ApiService
         return response.IsSuccessStatusCode;
     }
 
-    // Orders
     public async Task<List<Order>> GetOrdersAsync()
     {
         var client = await GetAuthorizedClientAsync();
@@ -388,7 +381,6 @@ public class ApiService
         return response.IsSuccessStatusCode;
     }
 
-    // PosOrders
     public async Task<PosOrder> GetPosOrderAsync(int id)
     {
         var client = await GetAuthorizedClientAsync();
@@ -423,7 +415,6 @@ public class ApiService
         return response.IsSuccessStatusCode;
     }
 
-    // Users
     public async Task<bool> CreateUserAsync(User user)
     {
         var client = await GetAuthorizedClientAsync();
@@ -451,7 +442,6 @@ public class ApiService
         return response.IsSuccessStatusCode;
     }
 
-    // Roles
     public async Task<List<Role>> GetRolesAsync()
     {
         var client = await GetAuthorizedClientAsync();
@@ -469,8 +459,6 @@ public class ApiService
     public async Task<HttpClient> GetAuthenticatedClient()
     {
         var client = _httpClientFactory.CreateClient("ApiClient");
-
-        // Получаем токен из куков
         var token = _httpContextAccessor.HttpContext?.Request.Cookies["jwt_token"];
 
         if (!string.IsNullOrEmpty(token))
@@ -524,7 +512,6 @@ public class ApiService
             var client = await GetAuthorizedClientAsync();
             var response = await client.GetAsync($"api/admin/roles/{id}");
 
-            // Убрали EnsureSuccessStatusCode() для более гибкой обработки
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Доступ запрещен. Требуется авторизация.");
@@ -541,7 +528,7 @@ public class ApiService
         catch (Exception ex)
         {
             Console.WriteLine($"Ошибка в GetRoleAsync: {ex.Message}");
-            throw; // Пробрасываем исключение дальше
+            throw; 
         }
     }
 

@@ -24,7 +24,6 @@ public class CustomerController : Controller
     [HttpGet("Customer/ProductDetails/{id}")]
     public async Task<IActionResult> ProductDetails(int id)
     {
-        // Добавьте проверку
         Console.WriteLine($"Requested product ID: {id}");
 
         var product = await _apiService.GetProductDetailsAsync(id);

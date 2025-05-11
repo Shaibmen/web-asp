@@ -36,7 +36,6 @@ public class AdminController : Controller
         {
             if (!ModelState.IsValid)
             {
-                // Логирование ошибок валидации
                 foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
                 {
                     Console.WriteLine($"Validation error: {error.ErrorMessage}");
@@ -198,9 +197,8 @@ public class AdminController : Controller
     [HttpGet("Users")]
     public async Task<IActionResult> Users()
     {
-        // Явно указываем тип возвращаемого значения
         List<User> users = await _apiService.GetUsersAsync();
-        return View("UsersIndex", users); // List автоматически преобразуется в IEnumerable
+        return View("UsersIndex", users); 
     }
 
     [HttpGet("Users/Create")]
@@ -447,7 +445,6 @@ public class AdminController : Controller
         }
         catch (UnauthorizedAccessException)
         {
-            // Перенаправляем на страницу входа при ошибке авторизации
             return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("RolesEdit", new { id }) });
         }
         catch (Exception ex)

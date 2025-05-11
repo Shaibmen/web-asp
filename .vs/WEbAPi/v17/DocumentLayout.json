@@ -3,44 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\WEbAPi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\admin\\ordersedit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\admin\\ordersedit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\models\\dto\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:models\\dto\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\models\\catalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:models\\catalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\admin\\catalogscreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\admin\\catalogscreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\admin\\ordersdelete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\admin\\ordersdelete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\admin\\catalogsdelete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\admin\\catalogsdelete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,136 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "Models\\Order.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Order.cs",
-              "RelativeToolTip": "Models\\Order.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T03:11:38.266Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OrdersEdit.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\OrdersEdit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\OrdersEdit.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\OrdersEdit.cshtml",
-              "RelativeToolTip": "Views\\Admin\\OrdersEdit.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAwwC4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-11T03:08:03.869Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Models.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Dto\\Models.cs",
-              "RelativeDocumentMoniker": "Models\\Dto\\Models.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Dto\\Models.cs",
-              "RelativeToolTip": "Models\\Dto\\Models.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T03:02:35.955Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Catalog.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Catalog.cs",
-              "RelativeDocumentMoniker": "Models\\Catalog.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Catalog.cs",
-              "RelativeToolTip": "Models\\Catalog.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T03:00:53.117Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "OrdersDelete.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\OrdersDelete.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\OrdersDelete.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\OrdersDelete.cshtml",
-              "RelativeToolTip": "Views\\Admin\\OrdersDelete.cshtml",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvyEAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-11T02:45:13.165Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "Controllers\\AdminController.cs",
-              "ViewState": "AgIAAM0BAAAAAAAAAAAYwNMBAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T02:44:14.555Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "ApiService.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Services\\ApiService.cs",
               "RelativeDocumentMoniker": "Services\\ApiService.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Services\\ApiService.cs",
               "RelativeToolTip": "Services\\ApiService.cs",
-              "ViewState": "AgIAAAACAAAAAAAAAAAswCECAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACUCAAAAAAAAAAAuwD0CAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T23:13:33.778Z",
+              "WhenOpened": "2025-05-11T03:56:43.942Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CatalogsDelete.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\CatalogsDelete.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\CatalogsDelete.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\CatalogsDelete.cshtml",
-              "RelativeToolTip": "Views\\Admin\\CatalogsDelete.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAC0AAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-11T02:22:30.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CatalogsCreate.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\CatalogsCreate.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\CatalogsCreate.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\CatalogsCreate.cshtml",
-              "RelativeToolTip": "Views\\Admin\\CatalogsCreate.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAwwCEAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-11T02:21:59.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAQwLQAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T02:08:51.283Z",
+              "WhenOpened": "2025-05-11T03:56:22.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAQwIQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T03:56:01.394Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAMIBAAAAAAAAAAAqwOkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T03:49:35.833Z",
               "EditorCaption": ""
             }
           ]

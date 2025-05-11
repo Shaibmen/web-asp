@@ -6,26 +6,22 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавляем конфигурацию JWT (только для проверки токенов)
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var jwtKey = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
 
-// Конфигурация сервисов
 builder.Services.AddControllersWithViews();
 
 
 
-// Измените настройки кук:
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     options.MinimumSameSitePolicy = SameSiteMode.None;
-    options.Secure = CookieSecurePolicy.SameAsRequest; // Для разработки
+    options.Secure = CookieSecurePolicy.SameAsRequest; 
     options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always;
 });
 
 
 
-// Настройка авторизации
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
@@ -56,7 +52,6 @@ builder.Services.AddScoped<ApiService>();
 
 var app = builder.Build();
 
-// Конфигурация middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

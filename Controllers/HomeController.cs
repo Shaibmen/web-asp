@@ -23,7 +23,6 @@ namespace WEbAPi.Controllers
             _configuration = configuration;
             _httpClient = httpClientFactory.CreateClient("ApiClient");
         }
-        // Основные страницы
         public IActionResult Index()
         {
             return View();
@@ -34,7 +33,6 @@ namespace WEbAPi.Controllers
         public IActionResult BuyBook() => View();
         public IActionResult Favorite() => View();
 
-        // Аутентификация
         [HttpGet]
         public IActionResult Login() => View();
 
@@ -53,10 +51,8 @@ namespace WEbAPi.Controllers
                     return View(model);
                 }
 
-                // Set cookie with secure options
                 SetJwtCookie(token);
 
-                // Get user data using the token
                 var user = await _apiService.GetUserAsync(model.Login);
                 if (user == null)
                 {
@@ -64,7 +60,6 @@ namespace WEbAPi.Controllers
                     return View(model);
                 }
 
-                // Create claims identity
                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Login),
@@ -95,10 +90,8 @@ namespace WEbAPi.Controllers
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true, // Ensure this is true in production
                 SameSite = SameSiteMode.Lax,
                 Expires = DateTime.UtcNow.AddHours(1),
-                Domain = _configuration["CookieDomain"] // Set this in your appsettings
             };
 
             Response.Cookies.Append("jwt_token", token, cookieOptions);
@@ -136,7 +129,6 @@ public async Task<IActionResult> Register(RegisterRequest model)
 {
     if (!ModelState.IsValid)
     {
-        // Логируем ошибки валидации
         foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
         {
             Console.WriteLine($"Validation error: {error.ErrorMessage}");
@@ -146,7 +138,6 @@ public async Task<IActionResult> Register(RegisterRequest model)
 
     try
     {
-        // Создаем объект для отправки с нижним регистром полей
         var requestData = new
         {
             login = model.Login,
@@ -175,7 +166,6 @@ public async Task<IActionResult> Register(RegisterRequest model)
             return View(model);
         }
 
-        // Устанавливаем куки
         Response.Cookies.Append("jwt_token", authResponse.Token, new CookieOptions
         {
             HttpOnly = true,
