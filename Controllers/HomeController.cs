@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -12,12 +14,15 @@ namespace WEbAPi.Controllers
     public class HomeController : Controller
     {
         private readonly ApiService _apiService;
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
 
-        public HomeController(ApiService apiService)
+        public HomeController(ApiService apiService, IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _apiService = apiService;
+            _configuration = configuration;
+            _httpClient = httpClientFactory.CreateClient("ApiClient");
         }
-
         // Основные страницы
         public IActionResult Index()
         {
@@ -34,7 +39,6 @@ namespace WEbAPi.Controllers
         public IActionResult Login() => View();
 
 
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequest model)
         {
@@ -42,60 +46,64 @@ namespace WEbAPi.Controllers
 
             try
             {
-                var loginRequest = new { model.Login, model.Password };
-                var content = new StringContent(JsonSerializer.Serialize(loginRequest),
-                    Encoding.UTF8, "application/json");
-
-                var response = await _apiService.GetHttpClient().PostAsync("api/AuthApi/login", content);
-
-                if (!response.IsSuccessStatusCode)
+                var token = await _apiService.LoginAsync(model.Login, model.Password);
+                if (string.IsNullOrEmpty(token))
                 {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    ModelState.AddModelError("", $"Ошибка входа: {errorContent}");
+                    ModelState.AddModelError("", "Invalid login or password");
                     return View(model);
                 }
 
-                // Читаем ответ как строку и десериализуем вручную
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<LoginResult>(responseContent, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+                // Set cookie with secure options
+                SetJwtCookie(token);
 
-                if (result?.User == null)
+                // Get user data using the token
+                var user = await _apiService.GetUserAsync(model.Login);
+                if (user == null)
                 {
-                    ModelState.AddModelError("", "Неверный формат ответа от сервера");
+                    ModelState.AddModelError("", "Failed to get user data");
                     return View(model);
                 }
 
-                // Создаем claims на основе данных из API
+                // Create claims identity
                 var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.NameIdentifier, result.User.UserId.ToString()),
-                    new Claim(ClaimTypes.Name, result.User.Login),
-                    new Claim(ClaimTypes.Email, result.User.Email ?? ""),
-                    new Claim(ClaimTypes.Role, result.User.Role ?? "user")
-                };
+            {
+                new Claim(ClaimTypes.Name, user.Login),
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Role, user.RoleId.ToString())
+            };
 
-                var identity = new ClaimsIdentity(claims,
-                    CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsIdentity = new ClaimsIdentity(
+                    claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(
-                    new ClaimsPrincipal(identity),
-                    new AuthenticationProperties
-                    {
-                        IsPersistent = true,
-                        ExpiresUtc = DateTime.UtcNow.AddHours(1)
-                    });
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity));
 
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Ошибка входа: {ex.Message}");
+                ModelState.AddModelError("", $"Login error: {ex.Message}");
                 return View(model);
             }
         }
+
+
+
+        private void SetJwtCookie(string token)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true, // Ensure this is true in production
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTime.UtcNow.AddHours(1),
+                Domain = _configuration["CookieDomain"] // Set this in your appsettings
+            };
+
+            Response.Cookies.Append("jwt_token", token, cookieOptions);
+        }
+
 
         public class LoginResult
         {
@@ -123,62 +131,77 @@ namespace WEbAPi.Controllers
 
         [HttpGet]
         public IActionResult Register() => View();
-
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterRequest model)
+public async Task<IActionResult> Register(RegisterRequest model)
+{
+    if (!ModelState.IsValid)
+    {
+        // Логируем ошибки валидации
+        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
         {
-            if (!ModelState.IsValid) return View(model);
+            Console.WriteLine($"Validation error: {error.ErrorMessage}");
+        }
+        return View(model);
+    }
 
-            try
-            {
-                var token = await _apiService.RegisterAsync(model.Login, model.Email, model.Password);
-                var response = await _apiService.GetHttpClient().GetAsync($"api/AuthApi/user-by-login/{model.Login}");
+    try
+    {
+        // Создаем объект для отправки с нижним регистром полей
+        var requestData = new
+        {
+            login = model.Login,
+            email = model.Email,
+            password = model.Password
+        };
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception("Не удалось получить данные пользователя");
-                }
+        Console.WriteLine($"Sending: {JsonSerializer.Serialize(requestData)}");
+        
+        var response = await _httpClient.PostAsJsonAsync("api/AuthApi/register", requestData);
+        var responseContent = await response.Content.ReadAsStringAsync();
+        
+        Console.WriteLine($"Received: {response.StatusCode}, {responseContent}");
 
-                var user = await response.Content.ReadFromJsonAsync<UserInfo>();
-                await SetAuthCookie(user, token);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", ex.Message);
-                return View(model);
-            }
+        if (!response.IsSuccessStatusCode)
+        {
+            ModelState.AddModelError("", $"Ошибка сервера: {responseContent}");
+            return View(model);
         }
 
+        var authResponse = JsonSerializer.Deserialize<AuthResponse>(responseContent);
+        
+        if (string.IsNullOrEmpty(authResponse?.Token))
+        {
+            ModelState.AddModelError("", "Не удалось получить токен");
+            return View(model);
+        }
+
+        // Устанавливаем куки
+        Response.Cookies.Append("jwt_token", authResponse.Token, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = Request.IsHttps,
+            SameSite = SameSiteMode.Lax,
+            Expires = DateTimeOffset.Now.AddHours(1)
+        });
+
+        return RedirectToAction("Index");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Exception: {ex}");
+        ModelState.AddModelError("", $"Ошибка соединения: {ex.Message}");
+        return View(model);
+    }
+}
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             Response.Cookies.Delete("jwt_token");
             return RedirectToAction("Index");
         }
 
-        private async Task SetAuthCookie(UserInfo user, string token)
-        {
-            // Устанавливаем JWT токен в cookie
-            Response.Cookies.Append("jwt_token", token, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddHours(1)
-            });
+        
 
-            // Создаем claims с ролью
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Login),
-                new Claim(ClaimTypes.Email, user.Email ?? ""),
-                new Claim(ClaimTypes.Role, user.Role ?? "user"),
-                new Claim("JWT", token)
-            };
-
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
-        }
+       
     }
 }

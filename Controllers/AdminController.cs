@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using WEbAPi.Models;
 
-[Authorize(Roles = "admin")]
+[Authorize(Roles = "2")]
+[Route("Admin")]
 public class AdminController : Controller
 {
     private readonly ApiService _apiService;
@@ -14,41 +15,43 @@ public class AdminController : Controller
 
     #region Catalogs Views
 
+    [HttpGet("Catalogs")]
     public async Task<IActionResult> Catalogs()
     {
         var catalogs = await _apiService.GetCatalogsAsync();
         return View("CatalogsIndex", catalogs);
     }
 
-    public IActionResult CreateCatalog()
+    [HttpGet("Catalogs/Create")]
+    public IActionResult CatalogsCreate()
     {
         return View("CatalogsCreate");
     }
 
-    [HttpPost]
+    [HttpPost("Catalogs/Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateCatalog(Catalog catalog)
+    public async Task<IActionResult> CatalogsCreate(Catalog catalog)
     {
         if (ModelState.IsValid)
         {
             if (await _apiService.CreateCatalogAsync(catalog))
                 return RedirectToAction(nameof(Catalogs));
-
             ModelState.AddModelError("", "Ошибка при создании каталога");
         }
         return View("CatalogsCreate", catalog);
     }
 
-    public async Task<IActionResult> EditCatalog(int id)
+    [HttpGet("Catalogs/Edit/{id}")]
+    public async Task<IActionResult> CatalogsEdit(int id)
     {
         var catalog = await _apiService.GetCatalogByIdAsync(id);
         if (catalog == null) return NotFound();
         return View("CatalogsEdit", catalog);
     }
 
-    [HttpPost]
+    [HttpPost("Catalogs/Edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditCatalog(int id, Catalog catalog)
+    public async Task<IActionResult> CatalogsEdit(int id, Catalog catalog)
     {
         if (id != catalog.CatalogsId) return NotFound();
 
@@ -56,68 +59,69 @@ public class AdminController : Controller
         {
             if (await _apiService.UpdateCatalogAsync(id, catalog))
                 return RedirectToAction(nameof(Catalogs));
-
             ModelState.AddModelError("", "Ошибка при обновлении каталога");
         }
         return View("CatalogsEdit", catalog);
     }
 
-    public async Task<IActionResult> DeleteCatalog(int id)
+    [HttpGet("Catalogs/Delete/{id}")]
+    public async Task<IActionResult> CatalogsDelete(int id)
     {
         var catalog = await _apiService.GetCatalogByIdAsync(id);
         if (catalog == null) return NotFound();
         return View("CatalogsDelete", catalog);
     }
 
-    [HttpPost, ActionName("DeleteCatalog")]
+    [HttpPost("Catalogs/Delete/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteCatalogConfirmed(int id)
+    public async Task<IActionResult> CatalogsDeleteConfirmed(int id)
     {
         if (await _apiService.DeleteCatalogAsync(id))
             return RedirectToAction(nameof(Catalogs));
-
-        return RedirectToAction(nameof(DeleteCatalog), new { id, error = true });
+        return RedirectToAction("CatalogsDelete", new { id, error = true });
     }
 
     #endregion
 
     #region Categories Views
 
+    [HttpGet("Categories")]
     public async Task<IActionResult> Categories()
     {
         var categories = await _apiService.GetCategoriesAsync();
         return View("CategoriesIndex", categories);
     }
 
-    public IActionResult CreateCategory()
+    [HttpGet("Categories/Create")]
+    public IActionResult CategoriesCreate()
     {
         return View("CategoriesCreate");
     }
 
-    [HttpPost]
+    [HttpPost("Categories/Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateCategory(Category category)
+    public async Task<IActionResult> CategoriesCreate(Category category)
     {
         if (ModelState.IsValid)
         {
             if (await _apiService.CreateCategoryAsync(category))
                 return RedirectToAction(nameof(Categories));
-
             ModelState.AddModelError("", "Ошибка при создании категории");
         }
         return View("CategoriesCreate", category);
     }
 
-    public async Task<IActionResult> EditCategory(int id)
+    [HttpGet("Categories/Edit/{id}")]
+    public async Task<IActionResult> CategoriesEdit(int id)
     {
         var category = await _apiService.GetCategoryAsync(id);
         if (category == null) return NotFound();
         return View("CategoriesEdit", category);
     }
 
-    [HttpPost]
+    [HttpPost("Categories/Edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditCategory(int id, Category category)
+    public async Task<IActionResult> CategoriesEdit(int id, Category category)
     {
         if (id != category.CategoryId) return NotFound();
 
@@ -125,73 +129,72 @@ public class AdminController : Controller
         {
             if (await _apiService.UpdateCategoryAsync(id, category))
                 return RedirectToAction(nameof(Categories));
-
             ModelState.AddModelError("", "Ошибка при обновлении категории");
         }
         return View("CategoriesEdit", category);
     }
 
-    public async Task<IActionResult> DeleteCategory(int id)
+    [HttpGet("Categories/Delete/{id}")]
+    public async Task<IActionResult> CategoriesDelete(int id)
     {
         var category = await _apiService.GetCategoryAsync(id);
         if (category == null) return NotFound();
         return View("CategoriesDelete", category);
     }
 
-    [HttpPost, ActionName("DeleteCategory")]
+    [HttpPost("Categories/Delete/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteCategoryConfirmed(int id)
+    public async Task<IActionResult> CategoriesDeleteConfirmed(int id)
     {
         if (await _apiService.DeleteCategoryAsync(id))
             return RedirectToAction(nameof(Categories));
-
-        return RedirectToAction(nameof(DeleteCategory), new { id, error = true });
+        return RedirectToAction("CategoriesDelete", new { id, error = true });
     }
 
     #endregion
 
     #region Users Views
 
+    [HttpGet("Users")]
     public async Task<IActionResult> Users()
     {
         var users = await _apiService.GetUsersAsync();
         return View("UsersIndex", users);
     }
 
-    public async Task<IActionResult> CreateUser()
+    [HttpGet("Users/Create")]
+    public async Task<IActionResult> UsersCreate()
     {
         ViewBag.Roles = await _apiService.GetRolesAsync();
         return View("UsersCreate");
     }
 
-    [HttpPost]
+    [HttpPost("Users/Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateUser(User user)
+    public async Task<IActionResult> UsersCreate(User user)
     {
         if (ModelState.IsValid)
         {
             if (await _apiService.CreateUserAsync(user))
                 return RedirectToAction(nameof(Users));
-
             ModelState.AddModelError("", "Ошибка при создании пользователя");
         }
-
         ViewBag.Roles = await _apiService.GetRolesAsync();
         return View("UsersCreate", user);
     }
 
-    public async Task<IActionResult> EditUser(int id)
+    [HttpGet("Users/Edit/{id}")]
+    public async Task<IActionResult> UsersEdit(int id)
     {
         var user = await _apiService.GetUserAsync(id);
         if (user == null) return NotFound();
-
         ViewBag.Roles = await _apiService.GetRolesAsync();
         return View("UsersEdit", user);
     }
 
-    [HttpPost]
+    [HttpPost("Users/Edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditUser(int id, User user)
+    public async Task<IActionResult> UsersEdit(int id, User user)
     {
         if (id != user.UserId) return NotFound();
 
@@ -199,106 +202,129 @@ public class AdminController : Controller
         {
             if (await _apiService.UpdateUserAsync(id, user))
                 return RedirectToAction(nameof(Users));
-
             ModelState.AddModelError("", "Ошибка при обновлении пользователя");
         }
-
         ViewBag.Roles = await _apiService.GetRolesAsync();
         return View("UsersEdit", user);
     }
 
-    public async Task<IActionResult> DeleteUser(int id)
+    [HttpGet("Users/Delete/{id}")]
+    public async Task<IActionResult> UsersDelete(int id)
     {
         var user = await _apiService.GetUserAsync(id);
         if (user == null) return NotFound();
         return View("UsersDelete", user);
     }
 
-    [HttpPost, ActionName("DeleteUser")]
+    [HttpPost("Users/Delete/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteUserConfirmed(int id)
+    public async Task<IActionResult> UsersDeleteConfirmed(int id)
     {
         if (await _apiService.DeleteUserAsync(id))
             return RedirectToAction(nameof(Users));
-
-        return RedirectToAction(nameof(DeleteUser), new { id, error = true });
+        return RedirectToAction("UsersDelete", new { id, error = true });
     }
 
     #endregion
 
     #region Orders Views
 
-    [HttpPost, ActionName("GetOrder")]
-    [ValidateAntiForgeryToken]
+    [HttpGet("Orders")]
     public async Task<IActionResult> Orders()
     {
         var orders = await _apiService.GetOrdersAsync();
         return View("OrdersIndex", orders);
     }
 
-    public async Task<IActionResult> OrderDetails(int id)
+    [HttpGet("Orders/Edit/{id}")]
+    public async Task<IActionResult> OrdersEdit(int id)
+    {
+        var order = await _apiService.GetOrderAsync(id);
+        if (order == null) return NotFound();
+        return View("OrdersEdit", order);
+    }
+
+    [HttpPost("Orders/Edit/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> OrdersEdit(int id, Order order)
+    {
+        if (id != order.OrdersId) return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            if (await _apiService.UpdateOrderAsync(id, order))
+                return RedirectToAction(nameof(Orders));
+            ModelState.AddModelError("", "Ошибка при обновлении заказа");
+        }
+        return View("OrdersEdit", order);
+    }
+
+    [HttpGet("Orders/Details/{id}")]
+    public async Task<IActionResult> OrdersDetails(int id)
     {
         var order = await _apiService.GetOrderAsync(id);
         if (order == null) return NotFound();
         return View("OrdersDetails", order);
     }
 
-    public async Task<IActionResult> DeleteOrder(int id)
+    [HttpGet("Orders/Delete/{id}")]
+    public async Task<IActionResult> OrdersDelete(int id)
     {
         var order = await _apiService.GetOrderAsync(id);
         if (order == null) return NotFound();
         return View("OrdersDelete", order);
     }
 
-    [HttpPost, ActionName("DeleteOrder")]
+    [HttpPost("Orders/Delete/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteOrderConfirmed(int id)
+    public async Task<IActionResult> OrdersDeleteConfirmed(int id)
     {
         if (await _apiService.DeleteOrderAsync(id))
             return RedirectToAction(nameof(Orders));
-
-        return RedirectToAction(nameof(DeleteOrder), new { id, error = true });
+        return RedirectToAction("OrdersDelete", new { id, error = true });
     }
 
     #endregion
 
     #region PosOrders Views
 
+    [HttpGet("PosOrders")]
     public async Task<IActionResult> PosOrders()
     {
         var posOrders = await _apiService.GetPosOrdersAsync();
         return View("PosOrdersIndex", posOrders);
     }
 
-    public IActionResult CreatePosOrder()
+    [HttpGet("PosOrders/Create")]
+    public IActionResult PosOrdersCreate()
     {
         return View("PosOrdersCreate");
     }
 
-    [HttpPost]
+    [HttpPost("PosOrders/Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreatePosOrder(PosOrder posOrder)
+    public async Task<IActionResult> PosOrdersCreate(PosOrder posOrder)
     {
         if (ModelState.IsValid)
         {
             if (await _apiService.CreatePosOrderAsync(posOrder))
                 return RedirectToAction(nameof(PosOrders));
-
             ModelState.AddModelError("", "Ошибка при создании позиции заказа");
         }
         return View("PosOrdersCreate", posOrder);
     }
 
-    public async Task<IActionResult> EditPosOrder(int id)
+    [HttpGet("PosOrders/Edit/{id}")]
+    public async Task<IActionResult> PosOrdersEdit(int id)
     {
         var posOrder = await _apiService.GetPosOrderAsync(id);
         if (posOrder == null) return NotFound();
         return View("PosOrdersEdit", posOrder);
     }
 
-    [HttpPost]
+    [HttpPost("PosOrders/Edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditPosOrder(int id, PosOrder posOrder)
+    public async Task<IActionResult> PosOrdersEdit(int id, PosOrder posOrder)
     {
         if (id != posOrder.PosOrderId) return NotFound();
 
@@ -306,38 +332,77 @@ public class AdminController : Controller
         {
             if (await _apiService.UpdatePosOrderAsync(id, posOrder))
                 return RedirectToAction(nameof(PosOrders));
-
             ModelState.AddModelError("", "Ошибка при обновлении позиции заказа");
         }
         return View("PosOrdersEdit", posOrder);
     }
 
-    public async Task<IActionResult> DeletePosOrder(int id)
+    [HttpGet("PosOrders/Delete/{id}")]
+    public async Task<IActionResult> PosOrdersDelete(int id)
     {
         var posOrder = await _apiService.GetPosOrderAsync(id);
         if (posOrder == null) return NotFound();
         return View("PosOrdersDelete", posOrder);
     }
 
-
-    [HttpPost, ActionName("DeletePosOrder")]
+    [HttpPost("PosOrders/Delete/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeletePosOrderConfirmed(int id)
+    public async Task<IActionResult> PosOrdersDeleteConfirmed(int id)
     {
         if (await _apiService.DeletePosOrderAsync(id))
             return RedirectToAction(nameof(PosOrders));
-
-        return RedirectToAction(nameof(DeletePosOrder), new { id, error = true });
+        return RedirectToAction("PosOrdersDelete", new { id, error = true });
     }
 
     #endregion
 
     #region Roles Views
 
+    [HttpGet("Roles")]
     public async Task<IActionResult> Roles()
     {
         var roles = await _apiService.GetRolesAsync();
         return View("RolesIndex", roles);
+    }
+
+    [HttpGet("Roles/Edit/{id}")]
+    public async Task<IActionResult> RolesEdit(int id)
+    {
+        var role = await _apiService.GetRoleAsync(id);
+        if (role == null) return NotFound();
+        return View("RolesEdit", role);
+    }
+
+    [HttpPost("Roles/Edit/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RolesEdit(int id, Role role)
+    {
+        if (id != role.RoleId) return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            if (await _apiService.UpdateRoleAsync(id, role))
+                return RedirectToAction(nameof(Roles));
+            ModelState.AddModelError("", "Ошибка при обновлении роли");
+        }
+        return View("RolesEdit", role);
+    }
+
+    [HttpGet("Roles/Delete/{id}")]
+    public async Task<IActionResult> RolesDelete(int id)
+    {
+        var role = await _apiService.GetRoleAsync(id);
+        if (role == null) return NotFound();
+        return View("RolesDelete", role);
+    }
+
+    [HttpPost("Roles/Delete/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RolesDeleteConfirmed(int id)
+    {
+        if (await _apiService.DeleteRoleAsync(id))
+            return RedirectToAction(nameof(Roles));
+        return RedirectToAction("RolesDelete", new { id, error = true });
     }
 
     #endregion

@@ -7,14 +7,6 @@
       "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\admin\\catalogscreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\admin\\catalogscreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,16 +19,20 @@
       "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\admin\\ordersindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\admin\\ordersindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\models\\dto\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:models\\dto\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|c:\\users\\user\\source\\repos\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DBC521A-3018-4BD3-BB10-686E85034251}|WEbAPi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,84 +42,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CatalogsCreate.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\CatalogsCreate.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\CatalogsCreate.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\CatalogsCreate.cshtml",
-              "RelativeToolTip": "Views\\Admin\\CatalogsCreate.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T01:07:38.24Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAwGQAAAA3AAAAAAAAAA==",
+              "Title": "ApiService.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Services\\ApiService.cs",
+              "RelativeDocumentMoniker": "Services\\ApiService.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Services\\ApiService.cs",
+              "RelativeToolTip": "Services\\ApiService.cs",
+              "ViewState": "AgIAABcCAAAAAAAAAAAqwCkCAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T00:44:05.738Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "_Header.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Shared\\_Header.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Header.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Shared\\_Header.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Header.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAB4AAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T00:36:28.125Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T00:36:20.365Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Models.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Dto\\Models.cs",
-              "RelativeDocumentMoniker": "Models\\Dto\\Models.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Dto\\Models.cs",
-              "RelativeToolTip": "Models\\Dto\\Models.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAUwIwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T00:24:20.777Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAwGEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T00:01:53.747Z",
+              "WhenOpened": "2025-05-07T23:13:33.778Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -134,35 +66,88 @@
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\AdminController.cs",
               "RelativeToolTip": "Controllers\\AdminController.cs",
-              "ViewState": "AgIAAPEAAAAAAAAAAAAuwOYAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAHoBAAAAAAAAAAAAwJgBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T17:40:41.641Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CustomerController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\CustomerController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\CustomerController.cs",
-              "RelativeToolTip": "Controllers\\CustomerController.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAuwHUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T17:41:24.103Z",
+              "Title": "OrdersIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\OrdersIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\OrdersIndex.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Admin\\OrdersIndex.cshtml",
+              "RelativeToolTip": "Views\\Admin\\OrdersIndex.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwCQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-11T00:25:56.487Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ApiService.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Services\\ApiService.cs",
-              "RelativeDocumentMoniker": "Services\\ApiService.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Services\\ApiService.cs",
-              "RelativeToolTip": "Services\\ApiService.cs",
-              "ViewState": "AgIAAH4BAAAAAAAAAAAAwJwBAAAFAAAAAAAAAA==",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAjwDsAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T23:13:33.778Z",
+              "WhenOpened": "2025-05-11T00:16:59.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Header.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Shared\\_Header.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Header.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Views\\Shared\\_Header.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Header.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAACgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-11T00:14:56.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Models.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Dto\\Models.cs",
+              "RelativeDocumentMoniker": "Models\\Dto\\Models.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Models\\Dto\\Models.cs",
+              "RelativeToolTip": "Models\\Dto\\Models.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAxwGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T23:57:53.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T00:44:05.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WEbAPi\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAuwHEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T17:41:24.103Z",
               "EditorCaption": ""
             }
           ]

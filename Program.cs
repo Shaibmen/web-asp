@@ -1,78 +1,57 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавляем конфигурацию JWT из appsettings.json
+// Добавляем конфигурацию JWT (только для проверки токенов)
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var jwtKey = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
 
 // Конфигурация сервисов
 builder.Services.AddControllersWithViews();
 
-// Настройка HttpClient для API
-builder.Services.AddHttpClient("ApiClient", client =>
+
+
+// Измените настройки кук:
+builder.Services.Configure<CookiePolicyOptions>(options =>
 {
-    client.BaseAddress = new Uri("https://localhost:7111");
-    client.DefaultRequestHeaders.Accept.Add(
-        new MediaTypeWithQualityHeaderValue("application/json"));
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.SameAsRequest; // Для разработки
+    options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always;
 });
 
-// Настройка аутентификации
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = "JWT_OR_COOKIE";
-    options.DefaultChallengeScheme = "JWT_OR_COOKIE";
-})
-.AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
-{
-    options.ForwardDefaultSelector = context =>
-    {
-        // Если есть Authorization header - используем JWT
-        if (context.Request.Headers.ContainsKey("Authorization"))
-            return JwtBearerDefaults.AuthenticationScheme;
 
-        // Иначе используем Cookies
-        return CookieAuthenticationDefaults.AuthenticationScheme;
-    };
-})
-.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-{
-    options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.SameSite = SameSiteMode.Strict;
-    options.LoginPath = "/Home/Login";
-    options.AccessDeniedPath = "/Home/AccessDenied";
-    options.ExpireTimeSpan = TimeSpan.FromHours(1);
-})
-.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(jwtKey)
-    };
-});
 
 // Настройка авторизации
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
-        policy.RequireAuthenticatedUser()
-              .RequireRole("Admin"));
+        policy.RequireRole("admin"));
 });
 
+builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.HttpOnly = true;
+        options.LoginPath = "/Home/Login";
+        options.AccessDeniedPath = "/Home/AccessDenied";
+    });
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient("ApiClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7111/");
+    client.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWithQualityHeaderValue("application/json"));
+});
+
 builder.Services.AddScoped<ApiService>();
 
 var app = builder.Build();

@@ -22,14 +22,18 @@ public class ApiService
 
     private async Task<HttpClient> GetAuthorizedClientAsync()
     {
-        var token = _httpContextAccessor.HttpContext?.Request.Cookies["jwt_token"];
         var client = _httpClientFactory.CreateClient("ApiClient");
+        var token = _httpContextAccessor.HttpContext?.Request.Cookies["jwt_token"];
 
         if (!string.IsNullOrEmpty(token))
         {
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
         }
+
+        client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
         return client;
     }
 
@@ -60,19 +64,26 @@ public class ApiService
         return authResponse?.Token;
     }
 
-    public async Task<string?> RegisterAsync(string login, string? email, string password)
+    public async Task<(string Token, string Error)> RegisterAsync(string login, string? email, string password)
     {
-        var registerRequest = new { Login = login, Email = email, Password = password };
-        var response = await _httpClient.PostAsJsonAsync("api/AuthApi/register", registerRequest);
-
-        if (!response.IsSuccessStatusCode)
+        try
         {
-            var errorContent = await response.Content.ReadAsStringAsync();
-            throw new Exception($"Registration failed: {errorContent}");
-        }
+            var registerRequest = new { Login = login, Email = email, Password = password };
+            var response = await _httpClient.PostAsJsonAsync("api/AuthApi/register", registerRequest);
 
-        var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
-        return authResponse?.Token;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                return (null, $"Ошибка регистрации: {errorContent}");
+            }
+
+            var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
+            return (authResponse?.Token, null);
+        }
+        catch (Exception ex)
+        {
+            return (null, $"Ошибка при регистрации: {ex.Message}");
+        }
     }
 
     // Методы для каталога
@@ -460,7 +471,7 @@ public class ApiService
         var client = _httpClientFactory.CreateClient("ApiClient");
 
         // Получаем токен из куков
-        var token = _httpContextAccessor.HttpContext?.Request.Cookies["JWTToken"];
+        var token = _httpContextAccessor.HttpContext?.Request.Cookies["jwt_token"];
 
         if (!string.IsNullOrEmpty(token))
         {
@@ -475,6 +486,55 @@ public class ApiService
         return client;
     }
 
+    public async Task<List<Order>> GetOrdersWithDetailsAsync()
+    {
+        try
+        {
+            var client = await GetAuthorizedClientAsync();
+            var response = await client.GetAsync("api/admin/orders/with-details");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Error getting orders: {response.StatusCode}");
+                return new List<Order>();
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            return await response.Content.ReadFromJsonAsync<List<Order>>(options)
+                   ?? new List<Order>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception in GetOrdersWithDetailsAsync: {ex.Message}");
+            return new List<Order>();
+        }
+    }
+
+
+
+    public async Task<Role> GetRoleAsync(int id)
+    {
+        var response = await _httpClient.GetAsync($"/api/admin/roles/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<Role>();
+    }
+
+    public async Task<bool> UpdateRoleAsync(int id, Role role)
+    {
+        var response = await _httpClient.PutAsJsonAsync($"/api/admin/roles/{id}", role);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> DeleteRoleAsync(int id)
+    {
+        var response = await _httpClient.DeleteAsync($"/api/admin/roles/{id}");
+        return response.IsSuccessStatusCode;
+    }
 
 }
 
